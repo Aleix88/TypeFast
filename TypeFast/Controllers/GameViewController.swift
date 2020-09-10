@@ -44,6 +44,7 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.gameManager?.startNewGame()
+        self.firstWordLabel.text = self.gameManager?.nextWord()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -58,7 +59,9 @@ class GameViewController: UIViewController {
     private func nextChar(char: String) {
         guard let gameManager = self.gameManager else {return}
         if (gameManager.checkCharInput(char: char)) {
-            print(true)
+            if (gameManager.nextWordIfCompleted()) {
+                self.showNextWord(word: self.gameManager?.nextWord() ?? "")
+            }
         } else {print(false)}
     }
     
@@ -72,6 +75,7 @@ class GameViewController: UIViewController {
         self.inputTextField.borderStyle = .none
         self.inputTextField.textColor = .clear
         self.inputTextField.tintColor = .clear
+        self.inputTextField.autocorrectionType = .no
     }
     
     private func setupFocusedView() {

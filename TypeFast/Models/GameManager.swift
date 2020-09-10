@@ -31,9 +31,14 @@ class GameManager {
         }
         return false
     }
+    
+    func nextWord() -> String? {
+        guard self.words.count > self.wordIndex else {return nil}
+        return self.words[wordIndex]
+    }
  
     func nextWordIfCompleted() -> Bool {
-        if (self.currentWord.count == self.characterIndex + 1) {
+        if (self.currentWord.count <= self.characterIndex) {
             guard self.wordIndex + 1 < self.words.count else {return true}
             self.wordIndex += 1
             self.currentWord = self.words[self.wordIndex]
