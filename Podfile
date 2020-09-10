@@ -6,7 +6,6 @@ target 'TypeFast' do
 
   # Pods for TypeFast
 
-pod "WSTagsField"
 
   target 'TypeFastTests' do
     inherit! :search_paths

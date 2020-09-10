@@ -11,41 +11,117 @@ import UIKit
 class GameViewController: UIViewController {
     
     //MARK: Variables
-    @IBOutlet weak private var topStackView: UIStackView!
-    @IBOutlet weak private var bottomStackView: UIStackView!
+    @IBOutlet weak private var firstWordView: UIView!
+    @IBOutlet weak private var secondWordView: UIView!
+    @IBOutlet weak private var firstViewCenterConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var secondViewCenterConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var firstWordLabel: UILabel!
+    @IBOutlet weak private var secondWordLabel: UILabel!
+    @IBOutlet weak private var inputTextField: UITextField!
+    
+    private var focusedWordView: UIView?
+    private var unfocusedWordView: UIView?
+    private var focusedWordLabel: UILabel?
+    private var unfocusedWordLabel: UILabel?
+    private var focusedWordConstraint: NSLayoutConstraint?
+    private var unfocusedWordConstraint: NSLayoutConstraint?
+    
+    private var gameManager: GameManager?
     
     //MARK: Constants
     
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.topStackView.addArrangedSubview(WordView(word: "Aleix"))
-        self.topStackView.addArrangedSubview(WordView(word: "Paraulallarga"))
-        self.topStackView.addArrangedSubview(WordView(word: "Pep"))
+        self.secondViewCenterConstraint.constant = self.view.frame.width
+        self.view.layoutIfNeeded()
+        self.setupFocusedView()
+        self.gameManager = GameManager()
+        self.hideTextField()
+        self.inputTextField.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.gameManager?.startNewGame()
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.inputTextField.becomeFirstResponder()
     }
     
-    @IBAction func removeButton(_ sender: Any) {
-        deleteFirstWord()
-    }
     @IBAction func addButton(_ sender: Any) {
-        addWord(word: "NewWord")
+        nextWordAnimation()
     }
     
-    func addWord(word: String) {
-        UIView.animate(withDuration: 1, animations: {
-                    self.topStackView.addArrangedSubview(WordView(word: word))
-        }, completion: nil)
+    private func nextChar(char: String) {
+        guard let gameManager = self.gameManager else {return}
+        if (gameManager.checkCharInput(char: char)) {
+            print(true)
+        } else {print(false)}
     }
     
-    func deleteFirstWord() {
+    private func showNextWord(word: String) {
+        self.unfocusedWordLabel?.text = word
+        nextWordAnimation()
+    }
+    
+    private func hideTextField() {
+        self.inputTextField.backgroundColor = .clear
+        self.inputTextField.borderStyle = .none
+        self.inputTextField.textColor = .clear
+        self.inputTextField.tintColor = .clear
+    }
+    
+    private func setupFocusedView() {
+        self.focusedWordConstraint = self.firstViewCenterConstraint
+        self.unfocusedWordConstraint = self.secondViewCenterConstraint
+        self.focusedWordLabel = self.firstWordLabel
+        self.unfocusedWordLabel = self.secondWordLabel
+        self.focusedWordView = self.firstWordView
+        self.unfocusedWordView = self.secondWordView
+    }
+    
+    private func nextWordAnimation() {
+        self.focusedWordConstraint?.constant = -self.view.frame.width
+        self.focusedWordView?.backgroundColor = .green
+        self.unfocusedWordConstraint?.constant = 0
         UIView.animate(withDuration: 0.3, animations: {
-            guard let firstWordView = self.topStackView.arrangedSubviews.first else {return}
-            firstWordView.isHidden = true
+            self.view.layoutIfNeeded()
         }) { (_) in
-            guard let firstWordView = self.topStackView.arrangedSubviews.first else {return}
-            self.topStackView.removeArrangedSubview(firstWordView)
+            self.swapFocusedView()
+            self.unfocusedWordConstraint?.constant = self.view.frame.width
+            self.unfocusedWordView?.backgroundColor = .lightGray
         }
+    }
+    
+    private func swapFocusedView() {
+        let tmpConstraint = self.focusedWordConstraint
+        self.focusedWordConstraint = self.unfocusedWordConstraint
+        self.unfocusedWordConstraint = tmpConstraint
+        
+        let tmpLabel = self.focusedWordLabel
+        self.focusedWordLabel = self.unfocusedWordLabel
+        self.unfocusedWordLabel = tmpLabel
+        
+        let tmpView = self.focusedWordView
+        self.focusedWordView = self.unfocusedWordView
+        self.unfocusedWordView = tmpView
+    }
+  
+}
+
+
+//MARK: Texfield Delegate
+
+extension GameViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if (string.count > 0) {
+            self.nextChar(char: String(string.last!).lowercased())
+        }
+        return true
     }
     
 }
