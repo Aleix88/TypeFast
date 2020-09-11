@@ -53,11 +53,11 @@ class GameViewController: UIViewController {
         self.setupSlider(slider: self.myProcessSlider, tintColor: .TFYellow)
         self.setupSlider(slider: self.opponentProcessSlider, tintColor: .TFRed)
         self.firstWordLabel.text = self.gameManager?.nextWord()
-        self.showCountdownScreen()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.showCountdownScreen()
         self.inputTextField.becomeFirstResponder()
     }
     
@@ -89,6 +89,7 @@ class GameViewController: UIViewController {
                 self.myProcessSlider.value += 1
                 if (gameManager.areWordsFinished()) {
                     self.focusedWordView?.backgroundColor = self.correctBackgroundColor
+                    self.presentFinishScreen(didYouWin: true)
                 } else {
                     self.showNextWord(word: gameManager.nextWord() ?? "")
                 }
@@ -96,6 +97,13 @@ class GameViewController: UIViewController {
         } else {
             //Animation?
         }
+    }
+    
+    private func presentFinishScreen(didYouWin: Bool) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let finishVC = storyboard.instantiateViewController(identifier: "FinishViewController")
+        finishVC.modalPresentationStyle = .overFullScreen
+        self.present(finishVC, animated: true)
     }
     
     private func updateCharacterColor() {
