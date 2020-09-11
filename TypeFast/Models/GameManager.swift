@@ -10,11 +10,12 @@ import Foundation
 
 class GameManager {
     
-    private var currentWord: String = ""
-    private var characterIndex: Int = 0
     private var wordIndex = 0
     private var words: [String] = []
     
+    var characterIndex: Int = 0
+    var currentWord: String? = ""
+
     func startNewGame() {
         self.words = ["link", "development", "mobile"]
         self.currentWord = self.words.first!
@@ -23,7 +24,9 @@ class GameManager {
     }
     
     func checkCharInput(char: String) -> Bool {
-        let currentCharacter = self.currentWord[self.characterIndex]
+        guard let currentWord = self.currentWord else {return false}
+        guard self.characterIndex < currentWord.count else {return false}
+        let currentCharacter = currentWord[self.characterIndex]
         
         if (char == String(currentCharacter)) {
             self.characterIndex += 1
@@ -38,9 +41,14 @@ class GameManager {
     }
  
     func nextWordIfCompleted() -> Bool {
-        if (self.currentWord.count <= self.characterIndex) {
-            guard self.wordIndex + 1 < self.words.count else {return true}
+        guard let currentWord = self.currentWord else {return false}
+        if (currentWord.count <= self.characterIndex) {
+            guard self.wordIndex + 1 < self.words.count else {
+                self.wordIndex += 1
+                return true
+            }
             self.wordIndex += 1
+            self.characterIndex = 0
             self.currentWord = self.words[self.wordIndex]
             return true
         }
@@ -48,7 +56,7 @@ class GameManager {
     }
     
     func areWordsFinished() -> Bool {
-        return self.wordIndex + 1 >= self.words.count
+        return self.wordIndex >= self.words.count
     }
     
 }

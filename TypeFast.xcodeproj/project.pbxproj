@@ -19,6 +19,7 @@
 		198A02C62504EDCC00B68E39 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198A02C52504EDCC00B68E39 /* GradientBackgroundView.swift */; };
 		19B250C6250A6999009CB838 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B250C5250A6999009CB838 /* GameManager.swift */; };
 		19B250C8250A6AD3009CB838 /* String+Substring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B250C7250A6AD3009CB838 /* String+Substring.swift */; };
+		19B250CA250B8455009CB838 /* CountDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B250C9250B8454009CB838 /* CountDownViewController.swift */; };
 		19D66A31250A31E2005C4279 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D66A30250A31E2005C4279 /* GameViewController.swift */; };
 		19D66A35250A3311005C4279 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D66A34250A3311005C4279 /* UIView+Constraints.swift */; };
 		7E178ED2452E53524FC77376 /* Pods_TypeFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BE7A35175556272830532F /* Pods_TypeFast.framework */; };
@@ -63,6 +64,7 @@
 		198A02C52504EDCC00B68E39 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		19B250C5250A6999009CB838 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		19B250C7250A6AD3009CB838 /* String+Substring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Substring.swift"; sourceTree = "<group>"; };
+		19B250C9250B8454009CB838 /* CountDownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownViewController.swift; sourceTree = "<group>"; };
 		19D66A30250A31E2005C4279 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		19D66A34250A3311005C4279 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		1F2AB2E6AC65D4DAD4BA30FE /* Pods-TypeFastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypeFastTests.release.xcconfig"; path = "Target Support Files/Pods-TypeFastTests/Pods-TypeFastTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			children = (
 				198A02BD2502892200B68E39 /* MenuViewController.swift */,
 				19D66A30250A31E2005C4279 /* GameViewController.swift */,
+				19B250C9250B8454009CB838 /* CountDownViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 			files = (
 				198A028E250285DC00B68E39 /* AppDelegate.swift in Sources */,
 				19B250C8250A6AD3009CB838 /* String+Substring.swift in Sources */,
+				19B250CA250B8455009CB838 /* CountDownViewController.swift in Sources */,
 				19B250C6250A6999009CB838 /* GameManager.swift in Sources */,
 				198A02BE2502892200B68E39 /* MenuViewController.swift in Sources */,
 				198A0290250285DC00B68E39 /* SceneDelegate.swift in Sources */,

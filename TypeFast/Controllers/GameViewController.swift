@@ -49,6 +49,7 @@ class GameViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.showCountdownScreen()
         self.inputTextField.becomeFirstResponder()
     }
     
@@ -56,13 +57,40 @@ class GameViewController: UIViewController {
         nextWordAnimation()
     }
     
+    private func showCountdownScreen() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let countdownVC = storyboard.instantiateViewController(withIdentifier: "countdownViewController")
+        countdownVC.modalTransitionStyle = .crossDissolve
+        countdownVC.modalPresentationStyle = .overFullScreen
+        self.present(countdownVC, animated: true)
+    }
+    
     private func nextChar(char: String) {
         guard let gameManager = self.gameManager else {return}
         if (gameManager.checkCharInput(char: char)) {
+            self.updateCharacterColor()
             if (gameManager.nextWordIfCompleted()) {
-                self.showNextWord(word: self.gameManager?.nextWord() ?? "")
+                if (gameManager.areWordsFinished()) {
+                    print("Win")
+                } else {
+                    self.showNextWord(word: gameManager.nextWord() ?? "")
+                }
             }
-        } else {print(false)}
+        } else {
+            //Animation?
+        }
+    }
+    
+    private func updateCharacterColor() {
+        guard let word = self.gameManager?.currentWord else {return}
+        guard let charIndex = self.gameManager?.characterIndex else {return}
+        let okString = String(word.prefix(charIndex))
+        let koString = String(word.suffix(word.count - charIndex))
+        
+        let attrText = NSMutableAttributedString(string: okString, attributes: [NSAttributedString.Key.foregroundColor : UIColor.blue])
+        attrText.append(NSAttributedString(string: koString))
+            
+        self.focusedWordLabel?.attributedText = attrText
     }
     
     private func showNextWord(word: String) {
@@ -95,6 +123,7 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
         }) { (_) in
             self.swapFocusedView()
+            self.unfocusedWordLabel?.textColor = .black
             self.unfocusedWordConstraint?.constant = self.view.frame.width
             self.unfocusedWordView?.backgroundColor = .lightGray
         }
