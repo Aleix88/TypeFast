@@ -59,4 +59,8 @@ class GameManager {
         return self.wordIndex >= self.words.count
     }
     
+    func numberOfWords() -> Int {
+        return self.words.count
+    }
+    
 }

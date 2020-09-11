@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak private var secondViewCenterConstraint: NSLayoutConstraint!
     @IBOutlet weak private var firstWordLabel: UILabel!
     @IBOutlet weak private var secondWordLabel: UILabel!
+    @IBOutlet weak private var myProcessSlider: UISlider!
+    @IBOutlet weak private var opponentProcessSlider: UISlider!
     @IBOutlet weak private var inputTextField: UITextField!
     
     private var focusedWordView: UIView?
@@ -29,6 +31,10 @@ class GameViewController: UIViewController {
     private var gameManager: GameManager?
     
     //MARK: Constants
+    private let defaultTextColor = UIColor.white
+    private let correctTextColor = UIColor.black
+    private let correctBackgroundColor = UIColor.TFGreen
+    private let defaultBackogrundColor = UIColor.TFBlue
     
     //MARK: Life Cycle
     override func viewDidLoad() {
@@ -44,17 +50,27 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.gameManager?.startNewGame()
+        self.setupSlider(slider: self.myProcessSlider, tintColor: .TFYellow)
+        self.setupSlider(slider: self.opponentProcessSlider, tintColor: .TFRed)
         self.firstWordLabel.text = self.gameManager?.nextWord()
+        self.showCountdownScreen()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.showCountdownScreen()
         self.inputTextField.becomeFirstResponder()
     }
     
     @IBAction func addButton(_ sender: Any) {
         nextWordAnimation()
+    }
+    
+    private func setupSlider(slider: UISlider, tintColor: UIColor) {
+        slider.tintColor = tintColor
+        slider.thumbTintColor = tintColor
+        slider.minimumValue = 0
+        slider.maximumValue = Float(self.gameManager?.numberOfWords() ?? 1)
+        slider.value = 0
     }
     
     private func showCountdownScreen() {
@@ -70,8 +86,9 @@ class GameViewController: UIViewController {
         if (gameManager.checkCharInput(char: char)) {
             self.updateCharacterColor()
             if (gameManager.nextWordIfCompleted()) {
+                self.myProcessSlider.value += 1
                 if (gameManager.areWordsFinished()) {
-                    print("Win")
+                    self.focusedWordView?.backgroundColor = self.correctBackgroundColor
                 } else {
                     self.showNextWord(word: gameManager.nextWord() ?? "")
                 }
@@ -87,7 +104,7 @@ class GameViewController: UIViewController {
         let okString = String(word.prefix(charIndex))
         let koString = String(word.suffix(word.count - charIndex))
         
-        let attrText = NSMutableAttributedString(string: okString, attributes: [NSAttributedString.Key.foregroundColor : UIColor.blue])
+        let attrText = NSMutableAttributedString(string: okString, attributes: [NSAttributedString.Key.foregroundColor : self.correctTextColor])
         attrText.append(NSAttributedString(string: koString))
             
         self.focusedWordLabel?.attributedText = attrText
@@ -113,17 +130,22 @@ class GameViewController: UIViewController {
         self.unfocusedWordLabel = self.secondWordLabel
         self.focusedWordView = self.firstWordView
         self.unfocusedWordView = self.secondWordView
+        
+        self.focusedWordView?.backgroundColor = self.defaultBackogrundColor
+        self.unfocusedWordView?.backgroundColor = self.defaultBackogrundColor
+        self.focusedWordLabel?.textColor = self.defaultTextColor
+        self.unfocusedWordLabel?.textColor = self.defaultTextColor
     }
     
     private func nextWordAnimation() {
         self.focusedWordConstraint?.constant = -self.view.frame.width
-        self.focusedWordView?.backgroundColor = .green
+        self.focusedWordView?.backgroundColor = self.correctBackgroundColor
         self.unfocusedWordConstraint?.constant = 0
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         }) { (_) in
             self.swapFocusedView()
-            self.unfocusedWordLabel?.textColor = .black
+            self.unfocusedWordLabel?.textColor = self.defaultTextColor
             self.unfocusedWordConstraint?.constant = self.view.frame.width
             self.unfocusedWordView?.backgroundColor = .lightGray
         }

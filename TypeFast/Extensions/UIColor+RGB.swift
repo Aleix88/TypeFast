@@ -10,7 +10,8 @@ import UIKit
 
 
 extension UIColor {
-    
+
+    static let TFGreen = UIColor.rgb(r: 116, g: 212, b: 132)
     static let TFYellow = UIColor.rgb(r: 254, g: 214, b: 107)
     static let TFBlue = UIColor.rgb(r: 142, g: 144, b: 242)
     static let TFRed = UIColor.rgb(r: 230, g: 92, b: 139)
