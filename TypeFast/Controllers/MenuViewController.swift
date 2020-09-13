@@ -26,6 +26,7 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         self.addBackground()
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,6 +36,12 @@ class MenuViewController: UIViewController {
         self.titleSecondTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
             self.changeTitleColor(self.secondTitleContainerView)
         })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        _ = self.presentWith(id: "PopUpViewController", transitionStyle: .coverVertical)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {

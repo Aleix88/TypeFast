@@ -135,6 +135,85 @@
             </objects>
             <point key="canvasLocation" x="139" y="99"/>
         </scene>
+        <!--Pop Up View Controller-->
+        <scene sceneID="MN0-uE-OAI">
+            <objects>
+                <viewController storyboardIdentifier="PopUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RIz-yv-S9n" customClass="PopUpViewController" customModule="TypeFast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UTT-e2-9hN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skS-qh-FJw">
+                                <rect key="frame" x="0.0" y="606" width="414" height="300"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZuF-2R-GH1">
+                                        <rect key="frame" x="187" y="10" width="40" height="10"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="0GS-f1-VSV"/>
+                                            <constraint firstAttribute="width" constant="40" id="qNg-uY-b4J"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfq-7u-Vth">
+                                        <rect key="frame" x="179" y="35" width="56" height="25.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SD2-75-rNZ">
+                                        <rect key="frame" x="10" y="70.5" width="394" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lT7-VF-jf9">
+                                        <rect key="frame" x="20" y="106" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="Pfq-7u-Vth" firstAttribute="centerX" secondItem="skS-qh-FJw" secondAttribute="centerX" id="21K-54-xRk"/>
+                                    <constraint firstAttribute="trailing" secondItem="SD2-75-rNZ" secondAttribute="trailing" constant="10" id="3LU-6K-y6T"/>
+                                    <constraint firstItem="Pfq-7u-Vth" firstAttribute="top" secondItem="ZuF-2R-GH1" secondAttribute="bottom" constant="15" id="HrH-2z-rRc"/>
+                                    <constraint firstAttribute="height" constant="300" id="IS5-s5-7e3"/>
+                                    <constraint firstItem="SD2-75-rNZ" firstAttribute="top" secondItem="Pfq-7u-Vth" secondAttribute="bottom" constant="10" id="Knl-Jf-Pvs"/>
+                                    <constraint firstItem="ZuF-2R-GH1" firstAttribute="top" secondItem="skS-qh-FJw" secondAttribute="top" constant="10" id="M7F-jQ-NFI"/>
+                                    <constraint firstItem="SD2-75-rNZ" firstAttribute="leading" secondItem="skS-qh-FJw" secondAttribute="leading" constant="10" id="QKn-O5-gu1"/>
+                                    <constraint firstItem="lT7-VF-jf9" firstAttribute="leading" secondItem="skS-qh-FJw" secondAttribute="leading" constant="20" id="Y8z-fG-yFy"/>
+                                    <constraint firstAttribute="trailing" secondItem="lT7-VF-jf9" secondAttribute="trailing" constant="20" id="fgE-d4-eWg"/>
+                                    <constraint firstItem="ZuF-2R-GH1" firstAttribute="centerX" secondItem="skS-qh-FJw" secondAttribute="centerX" id="mMG-yX-Fgc"/>
+                                    <constraint firstItem="lT7-VF-jf9" firstAttribute="top" secondItem="SD2-75-rNZ" secondAttribute="bottom" constant="15" id="pNE-YO-dWT"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="skS-qh-FJw" firstAttribute="centerX" secondItem="UTT-e2-9hN" secondAttribute="centerX" id="6A0-7s-0bL"/>
+                            <constraint firstItem="skS-qh-FJw" firstAttribute="leading" secondItem="7TA-AG-0sT" secondAttribute="leading" id="AoM-Ea-zs8"/>
+                            <constraint firstAttribute="bottom" secondItem="skS-qh-FJw" secondAttribute="bottom" constant="-10" id="UNF-vE-AEb"/>
+                            <constraint firstItem="7TA-AG-0sT" firstAttribute="trailing" secondItem="skS-qh-FJw" secondAttribute="trailing" id="qGa-xL-f80"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7TA-AG-0sT"/>
+                    </view>
+                    <connections>
+                        <outlet property="bottomConstraint" destination="UNF-vE-AEb" id="1t0-HT-j2L"/>
+                        <outlet property="decorationView" destination="ZuF-2R-GH1" id="jhO-yS-BZO"/>
+                        <outlet property="descriptionLabel" destination="SD2-75-rNZ" id="Rjz-nH-te1"/>
+                        <outlet property="inputTextfield" destination="lT7-VF-jf9" id="NZx-Ip-oHV"/>
+                        <outlet property="titleLabel" destination="Pfq-7u-Vth" id="0lp-cl-EE8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tjU-oB-B0s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="810"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="TUB-Cy-FH6">
             <objects>
