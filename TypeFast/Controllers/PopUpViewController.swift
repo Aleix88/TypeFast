@@ -75,7 +75,7 @@ class PopUpViewController: UIViewController {
     }
     
     @objc func keyboardWillHide(notification: Notification) {
-        self.bottomConstraint.constant = - 10
+        self.bottomConstraint.constant = -10
 
         UIView.animate(withDuration: 0.5){
             self.view.layoutIfNeeded()
