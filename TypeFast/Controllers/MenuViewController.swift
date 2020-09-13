@@ -21,6 +21,12 @@ class MenuViewController: UIViewController {
     private var titleFirstTimer: Timer?
     private var titleSecondTimer: Timer?
     
+    private var popUpViewController: PopUpViewController?
+    
+    //MARK: Constants
+    private let createPopUpID = "createPopUpID"
+    private let joinPopUpID = "joinPopUpID"
+    
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +42,6 @@ class MenuViewController: UIViewController {
         self.titleSecondTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
             self.changeTitleColor(self.secondTitleContainerView)
         })
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        _ = self.presentWith(id: "PopUpViewController", transitionStyle: .coverVertical)
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,5 +72,41 @@ class MenuViewController: UIViewController {
         self.view.addSubview(backgroundView)
         self.view.sendSubviewToBack(backgroundView)
     }
+    
+    @IBAction func createButtonPressed(_ sender: Any) {
+        presentPopUp(title: "Room name", description: "You will need to share this name with your friend", placeholder: "Room name", buttonTitle: "Create room", id: self.createPopUpID)
+    }
+    
+    @IBAction func joinButtonPressed(_ sender: Any) {
+        presentPopUp(title: "Room name", description: "Ask your friend they room name to join.", placeholder: "Room name", buttonTitle: "Join room", id: self.joinPopUpID)
+    }
+    
+    private func presentPopUp(title: String?, description: String?, placeholder: String?, buttonTitle: String?, id: String?) {
+        let popUpVC = self.presentWith(id: "PopUpViewController", transitionStyle: .coverVertical) as! PopUpViewController
+        self.popUpViewController = popUpVC
+        popUpVC.popUpTitle = title
+        popUpVC.popUpDescription = description
+        popUpVC.textfieldPlaceholder = placeholder
+        popUpVC.buttonTitle = buttonTitle
+        popUpVC.popUpID = id
+        popUpVC.delegate = self
+    }
+}
 
+//MARK: PopUpDelegate
+
+extension MenuViewController: PopUpDelegate {
+    func buttonPressed(popUpID: String?, textfieldValue: String?) {
+        guard let popUpViewController = self.popUpViewController else {return}
+        guard let popUpID = popUpID, let value = textfieldValue else {return}
+        if (popUpID == self.joinPopUpID) {
+            popUpViewController.dismiss(animated: true) {
+                _ = self.presentWith(id: "GameViewController")
+            }
+        } else if (popUpID == self.createPopUpID) {
+            popUpViewController.dismiss(animated: true) {
+                _ = self.presentWith(id: "GameViewController")
+            }
+        }
+    }
 }

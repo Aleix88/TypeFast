@@ -17,7 +17,9 @@ extension UIViewController {
         if let transitionStyle = transitionStyle {
             vc.modalTransitionStyle = transitionStyle
         }
-        present(vc, animated: true)
+        DispatchQueue.main.async {
+            self.present(vc, animated: true)
+        }
         return vc
     }
     
