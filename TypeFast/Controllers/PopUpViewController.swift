@@ -70,13 +70,6 @@ class PopUpViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn, animations: {
-            self.view.backgroundColor = UIColor.rgb(r: 30, g: 30, b: 30, a: 0.5)
-        })
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn, animations: {

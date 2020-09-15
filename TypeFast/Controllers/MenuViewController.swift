@@ -82,7 +82,8 @@ class MenuViewController: UIViewController {
     }
     
     private func presentPopUp(title: String?, description: String?, placeholder: String?, buttonTitle: String?, id: String?) {
-        let popUpVC = self.presentWith(id: "PopUpViewController", transitionStyle: .coverVertical) as! PopUpViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let popUpVC = storyboard.instantiateViewController(identifier: "PopUpViewController") as? PopUpViewController else {return}
         self.popUpViewController = popUpVC
         popUpVC.popUpTitle = title
         popUpVC.popUpDescription = description
@@ -90,6 +91,7 @@ class MenuViewController: UIViewController {
         popUpVC.buttonTitle = buttonTitle
         popUpVC.popUpID = id
         popUpVC.delegate = self
+        self.present(popUpVC, animated: true)
     }
 }
 
@@ -101,11 +103,11 @@ extension MenuViewController: PopUpDelegate {
         guard let popUpID = popUpID, let value = textfieldValue else {return}
         if (popUpID == self.joinPopUpID) {
             popUpViewController.dismiss(animated: true) {
-                _ = self.presentWith(id: "GameViewController")
+                _ = self.presentWith(id: "GameViewController", completion: {_ in})
             }
         } else if (popUpID == self.createPopUpID) {
             popUpViewController.dismiss(animated: true) {
-                _ = self.presentWith(id: "GameViewController")
+                _ = self.presentWith(id: "GameViewController", completion: {_ in})
             }
         }
     }

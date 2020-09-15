@@ -49,20 +49,28 @@ class GameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.gameManager?.startNewGame()
         self.setupSlider(slider: self.myProcessSlider, tintColor: .TFYellow)
         self.setupSlider(slider: self.opponentProcessSlider, tintColor: .TFRed)
-        self.firstWordLabel.text = self.gameManager?.nextWord()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.showCountdownScreen()
-        self.inputTextField.becomeFirstResponder()
+        self.askForWords()
     }
     
-    @IBAction func addButton(_ sender: Any) {
-        nextWordAnimation()
+    private func askForWords() {
+        NetworkManager.shared.requestRandomWords(numberOfWords: 5) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let words):
+                DispatchQueue.main.async {
+                    self.gameManager?.startNewGame(words: words)
+                    self.showCountdownScreen()
+                    self.inputTextField.becomeFirstResponserInMainThread()
+                    self.firstWordLabel.text = self.gameManager?.nextWord()
+                }
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
     }
     
     private func setupSlider(slider: UISlider, tintColor: UIColor) {
@@ -74,11 +82,7 @@ class GameViewController: UIViewController {
     }
     
     private func showCountdownScreen() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let countdownVC = storyboard.instantiateViewController(withIdentifier: "countdownViewController")
-        countdownVC.modalTransitionStyle = .crossDissolve
-        countdownVC.modalPresentationStyle = .overFullScreen
-        self.present(countdownVC, animated: true)
+        _ = self.presentWith(id: "countdownViewController", presentationStyle: .overFullScreen, transitionStyle: .crossDissolve, completion: {_ in})
     }
     
     private func nextChar(char: String) {

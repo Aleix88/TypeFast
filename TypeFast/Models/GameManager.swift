@@ -16,8 +16,8 @@ class GameManager {
     var characterIndex: Int = 0
     var currentWord: String? = ""
 
-    func startNewGame() {
-        self.words = ["link", "development", "mobile"]
+    func startNewGame(words: [String]) {
+        self.words = words
         self.currentWord = self.words.first!
         self.wordIndex = 0
         self.characterIndex = 0

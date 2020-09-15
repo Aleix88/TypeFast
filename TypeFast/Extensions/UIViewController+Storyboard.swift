@@ -10,17 +10,18 @@ import UIKit
 
 extension UIViewController {
     
-    func presentWith(id: String, presentationStyle: UIModalPresentationStyle = .overFullScreen, transitionStyle: UIModalTransitionStyle? = nil) -> UIViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: id)
-        vc.modalPresentationStyle = presentationStyle
-        if let transitionStyle = transitionStyle {
-            vc.modalTransitionStyle = transitionStyle
-        }
+    func presentWith(id: String, presentationStyle: UIModalPresentationStyle = .overFullScreen, transitionStyle: UIModalTransitionStyle? = nil, completion: (@escaping (UIViewController)->())) {
         DispatchQueue.main.async {
-            self.present(vc, animated: true)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: id)
+            vc.modalPresentationStyle = presentationStyle
+            if let transitionStyle = transitionStyle {
+                vc.modalTransitionStyle = transitionStyle
+            }
+            self.present(vc, animated: true, completion: {
+                completion(vc)
+            })
         }
-        return vc
     }
     
 }
