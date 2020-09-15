@@ -45,18 +45,13 @@ class CountDownViewController: UIViewController {
         self.waitLabel.isHidden = true
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
             self.counter -= 1
-            print("Top: \(self.counter)")
-
             self.countdownLabel.text = String(self.counter)
             if (self.isTimeOut()) {
-                print(self.canDismiss)
                 if (self.canDismiss) {
                     self.dismiss(animated: true)
                 } else {
                     self.waitLabel.isHidden = false
                     self.counter = 1
-                    print("Bot: \(self.counter)")
-
                 }
             }
         })
@@ -81,7 +76,6 @@ class CountDownViewController: UIViewController {
             self.dismiss(animated: true)
         }
         self.canDismiss = true
-        print("Can dismiss changed: \(self.canDismiss)")
     }
 
 }
