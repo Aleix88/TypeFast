@@ -12,8 +12,10 @@ class CountDownViewController: UIViewController {
 
     //MARK: Variables
     @IBOutlet weak private var countdownLabel: UILabel!
-
+    @IBOutlet weak private var waitLabel: UILabel!
+    
     private var timer: Timer?
+    private var canDismiss = false
     
     @IBInspectable
     var counter: Int = 0 {
@@ -40,17 +42,46 @@ class CountDownViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.countdownLabel.text = String(counter)
+        self.waitLabel.isHidden = true
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
             self.counter -= 1
+            print("Top: \(self.counter)")
+
             self.countdownLabel.text = String(self.counter)
             if (self.isTimeOut()) {
-                self.dismiss(animated: true)
+                print(self.canDismiss)
+                if (self.canDismiss) {
+                    self.dismiss(animated: true)
+                } else {
+                    self.waitLabel.isHidden = false
+                    self.counter = 1
+                    print("Bot: \(self.counter)")
+
+                }
             }
         })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.timer?.invalidate()
+
+    }
+    
     private func isTimeOut() -> Bool {
         return counter <= 0
+    }
+    
+    func dismissIfFinished() {
+        if (isTimeOut()) {
+            self.dismiss(animated: true)
+        }
+        self.canDismiss = true
+        print("Can dismiss changed: \(self.canDismiss)")
     }
 
 }

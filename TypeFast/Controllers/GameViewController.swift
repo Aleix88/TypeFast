@@ -27,7 +27,7 @@ class GameViewController: UIViewController {
     private var unfocusedWordLabel: UILabel?
     private var focusedWordConstraint: NSLayoutConstraint?
     private var unfocusedWordConstraint: NSLayoutConstraint?
-    
+    private var countDownViewController: CountDownViewController?
     private var gameManager: GameManager?
     
     //MARK: Constants
@@ -49,6 +49,7 @@ class GameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.showCountdownScreen()
         self.askForWords()
     }
     
@@ -70,7 +71,7 @@ class GameViewController: UIViewController {
     
     private func onWordsRequestSucceed(words: [String]) {
         self.gameManager?.startNewGame(words: words)
-        self.showCountdownScreen()
+        self.countDownViewController?.dismissIfFinished()
         self.inputTextField.becomeFirstResponserInMainThread()
         self.firstWordLabel.text = self.gameManager?.nextWord()
         self.setupSlider(slider: self.myProcessSlider, tintColor: .TFYellow)
@@ -86,7 +87,12 @@ class GameViewController: UIViewController {
     }
     
     private func showCountdownScreen() {
-        _ = self.presentWith(id: "countdownViewController", presentationStyle: .overFullScreen, transitionStyle: .crossDissolve, completion: {_ in})
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        self.countDownViewController = storyboard.instantiateViewController(withIdentifier: "countdownViewController") as? CountDownViewController
+        guard let _ = self.countDownViewController else {return}
+        self.countDownViewController?.modalPresentationStyle = .overFullScreen
+        self.countDownViewController?.modalTransitionStyle = .crossDissolve
+        self.present(self.countDownViewController!, animated: true)
     }
     
     private func nextChar(char: String) {

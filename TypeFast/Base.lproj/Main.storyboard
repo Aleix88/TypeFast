@@ -436,15 +436,24 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting the server to respond..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTQ-3N-EOz">
+                                <rect key="frame" x="20" y="459" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="0.63235766267123283" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bTQ-3N-EOz" secondAttribute="trailing" constant="20" id="3di-Xj-oWm"/>
                             <constraint firstItem="q4S-BP-HC6" firstAttribute="centerX" secondItem="hhd-oS-FMR" secondAttribute="centerX" id="Eeh-Gd-74W"/>
                             <constraint firstItem="MYz-Qh-v7h" firstAttribute="centerX" secondItem="hhd-oS-FMR" secondAttribute="centerX" id="InB-bz-7dU"/>
                             <constraint firstItem="MYz-Qh-v7h" firstAttribute="top" secondItem="q4S-BP-HC6" secondAttribute="bottom" constant="20" id="LNK-Jv-eFf"/>
                             <constraint firstItem="q4S-BP-HC6" firstAttribute="top" secondItem="Oxo-Pw-SG9" secondAttribute="top" constant="150" id="dm2-L3-h27"/>
                             <constraint firstItem="MYz-Qh-v7h" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Oxo-Pw-SG9" secondAttribute="leading" constant="20" id="mhw-vc-zWG"/>
+                            <constraint firstItem="bTQ-3N-EOz" firstAttribute="top" secondItem="MYz-Qh-v7h" secondAttribute="bottom" constant="20" id="opt-jn-auq"/>
                             <constraint firstItem="Oxo-Pw-SG9" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="MYz-Qh-v7h" secondAttribute="trailing" constant="20" id="v1S-n7-tSK"/>
+                            <constraint firstItem="bTQ-3N-EOz" firstAttribute="leading" secondItem="Oxo-Pw-SG9" secondAttribute="leading" constant="20" id="v8l-16-MNe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oxo-Pw-SG9"/>
                     </view>
@@ -455,6 +464,7 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="countdownLabel" destination="MYz-Qh-v7h" id="sA2-fU-G6z"/>
+                        <outlet property="waitLabel" destination="bTQ-3N-EOz" id="hpV-1C-6bB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ci-wA-MMH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
