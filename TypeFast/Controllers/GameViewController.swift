@@ -49,8 +49,6 @@ class GameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupSlider(slider: self.myProcessSlider, tintColor: .TFYellow)
-        self.setupSlider(slider: self.opponentProcessSlider, tintColor: .TFRed)
         self.askForWords()
     }
     
@@ -60,10 +58,7 @@ class GameViewController: UIViewController {
             switch result {
             case .success(let words):
                 DispatchQueue.main.async {
-                    self.gameManager?.startNewGame(words: words)
-                    self.showCountdownScreen()
-                    self.inputTextField.becomeFirstResponserInMainThread()
-                    self.firstWordLabel.text = self.gameManager?.nextWord()
+                    self.onWordsRequestSucceed(words: words)
                 }
                 break
             case .failure(let error):
@@ -71,6 +66,15 @@ class GameViewController: UIViewController {
                 break
             }
         }
+    }
+    
+    private func onWordsRequestSucceed(words: [String]) {
+        self.gameManager?.startNewGame(words: words)
+        self.showCountdownScreen()
+        self.inputTextField.becomeFirstResponserInMainThread()
+        self.firstWordLabel.text = self.gameManager?.nextWord()
+        self.setupSlider(slider: self.myProcessSlider, tintColor: .TFYellow)
+        self.setupSlider(slider: self.opponentProcessSlider, tintColor: .TFRed)
     }
     
     private func setupSlider(slider: UISlider, tintColor: UIColor) {

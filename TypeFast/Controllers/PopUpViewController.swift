@@ -59,6 +59,7 @@ class PopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addGestureRecognizer(tapGesture)
+        self.view.backgroundColor = .clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,13 +69,6 @@ class PopUpViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn, animations: {
-            self.view.backgroundColor = UIColor.clear
-        })
     }
     
     override func viewDidLayoutSubviews() {
