@@ -103,8 +103,20 @@ class GameViewController: UIViewController {
                 }
             }
         } else {
-            //Animation?
+            self.errorShakeAnimation()
         }
+    }
+    
+    private func errorShakeAnimation() {
+        guard let viewToShake = self.focusedWordView else {return}
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.02
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: viewToShake.center.x - 10, y: viewToShake.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: viewToShake.center.x + 10, y: viewToShake.center.y))
+
+        viewToShake.layer.add(animation, forKey: "position")
     }
     
     private func presentFinishScreen(didYouWin: Bool) {
