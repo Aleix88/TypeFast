@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		192DAF612513670E00EFDA8B /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DAF602513670E00EFDA8B /* SocketManager.swift */; };
+		192DAF64251367D800EFDA8B /* SocketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DAF62251367D800EFDA8B /* SocketData.swift */; };
+		192DAF65251367D800EFDA8B /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DAF63251367D800EFDA8B /* MessageType.swift */; };
+		192DAF692513693200EFDA8B /* JSONHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DAF682513693200EFDA8B /* JSONHandler.swift */; };
 		198A028E250285DC00B68E39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198A028D250285DC00B68E39 /* AppDelegate.swift */; };
 		198A0290250285DC00B68E39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198A028F250285DC00B68E39 /* SceneDelegate.swift */; };
 		198A0295250285DC00B68E39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 198A0293250285DC00B68E39 /* Main.storyboard */; };
@@ -53,6 +57,10 @@
 
 /* Begin PBXFileReference section */
 		132CB1B39BE57896135E01ED /* Pods_TypeFast_TypeFastUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TypeFast_TypeFastUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		192DAF602513670E00EFDA8B /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		192DAF62251367D800EFDA8B /* SocketData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketData.swift; sourceTree = "<group>"; };
+		192DAF63251367D800EFDA8B /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
+		192DAF682513693200EFDA8B /* JSONHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHandler.swift; sourceTree = "<group>"; };
 		198A028A250285DC00B68E39 /* TypeFast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypeFast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		198A028D250285DC00B68E39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		198A028F250285DC00B68E39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -239,8 +247,12 @@
 		19C9361C250E315B006CDC23 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				192DAF63251367D800EFDA8B /* MessageType.swift */,
+				192DAF62251367D800EFDA8B /* SocketData.swift */,
 				19C9361D250E316A006CDC23 /* NetworkManager.swift */,
 				19C9361F2510B1D7006CDC23 /* NetworkError.swift */,
+				192DAF602513670E00EFDA8B /* SocketManager.swift */,
+				192DAF682513693200EFDA8B /* JSONHandler.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -464,6 +476,7 @@
 				19C936222510B9FD006CDC23 /* UITextField+FirstResponser.swift in Sources */,
 				198A028E250285DC00B68E39 /* AppDelegate.swift in Sources */,
 				19C936202510B1D7006CDC23 /* NetworkError.swift in Sources */,
+				192DAF65251367D800EFDA8B /* MessageType.swift in Sources */,
 				19B250C8250A6AD3009CB838 /* String+Substring.swift in Sources */,
 				19B250CA250B8455009CB838 /* CountDownViewController.swift in Sources */,
 				19C93618250E27C7006CDC23 /* PopUpDelegate.swift in Sources */,
@@ -473,11 +486,14 @@
 				198A02C125028F5200B68E39 /* UIColor+RGB.swift in Sources */,
 				19C93613250E1F35006CDC23 /* PopUpViewController.swift in Sources */,
 				19D66A31250A31E2005C4279 /* GameViewController.swift in Sources */,
+				192DAF692513693200EFDA8B /* JSONHandler.swift in Sources */,
 				198A02C62504EDCC00B68E39 /* GradientBackgroundView.swift in Sources */,
 				19D66A35250A3311005C4279 /* UIView+Constraints.swift in Sources */,
 				19C9361E250E316A006CDC23 /* NetworkManager.swift in Sources */,
 				19B250CD250B8F9F009CB838 /* FinishViewController.swift in Sources */,
+				192DAF612513670E00EFDA8B /* SocketManager.swift in Sources */,
 				19C93611250E1C17006CDC23 /* UIViewController+Storyboard.swift in Sources */,
+				192DAF64251367D800EFDA8B /* SocketData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

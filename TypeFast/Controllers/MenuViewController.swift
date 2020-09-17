@@ -31,6 +31,7 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBackground()
+        SocketManager.shared.connectToServer()
     }
 
     
